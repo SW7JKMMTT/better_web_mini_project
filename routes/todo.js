@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 var storage = require('node-persist');
 
-function Item(title, stat) {
+function Item(key, title, stat) {
+	this.key = key
 	this.title = title;
 	this.stat = stat;
 }
@@ -11,8 +12,8 @@ storage.init({
 		dir: "pewpew",
 })
 storage.setItem("items", [
-		new Item("Woo", false),
-		new Item("Woo2", true),
+		new Item(0, "Woo", false),
+		new Item(1, "Woo2", true),
 ]);
 
 /* GET home page. */
@@ -26,9 +27,10 @@ router.post("/api", function(req, res, next) {
 	console.log(req.body);
 	console.log("Adding " + req.body.title);
 	storage.getItem("items").then(function(items) {
-		items.push(new Item(req.body.title, false));
+		var item = new Item(req.body.key, req.body.title, false)
+		items.push(item);
 		storage.setItem("items", items);
-		res.json(items)
+		res.json(item)
 	});
 });
 
