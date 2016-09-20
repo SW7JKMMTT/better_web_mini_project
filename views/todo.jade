@@ -1,0 +1,12 @@
+extends layout
+
+block content
+	div(id="content")
+		h1= title
+		form(id="cuckform", name="add-thing")
+			div.input
+				span.label Title
+				input(type="text", name="title")
+			div.actions
+				input(type="submit", value="add")
+		ul(id="cucklist")
