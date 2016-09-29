@@ -1,2 +1,71 @@
 %!TEX root = ../main.tex
-\section{Miniproject 1}
+\chapter{Miniproject 1}
+We chose to use a framework called Express and React. 
+It works on top of Node.js, which is a JavaScript rumtime. 
+
+Express handles the web server and the routing to files, and React handles the rendering of the user interface.
+
+An example of Express routing can be seen on \myref{lst:express_route} and \myref{lst:express_route_use}.
+
+\begin{listing}
+    \begin{js}
+        var index = require('./routes/index');
+    \end{js}
+    \caption{Express GET method snippet.}
+    \label{lst:express_route}
+\end{listing}
+
+On \myref{lst:express_route_use} is requests on ``/'' redirected to ``index'', which is defined in \myref{lst:express_route}.
+We have made the folder structure of our project so that the logic for ``index'' is in ``./routes/index.js''.
+
+\begin{listing}
+    \begin{js}
+        app.use('/', index);
+    \end{js}
+    \caption{Express GET method snippet.}
+    \label{lst:express_route_use}
+\end{listing}
+
+An example of a GET request handle can be seen on \myref{lst:express_get}.
+Express handle request with call-back functions.
+``router.get'' is called when ``/api'' is requested and the function parameter is called. 
+In this example it writes ``Getting'' in the console and gets a collection of items called ``items''.
+
+\begin{listing}
+    \begin{js}
+        router.get("/api", function(req, res, next) {
+            console.log("Getting")
+            storage.getItem("items").then(function(items) {
+                res.json(items)
+            });
+        });
+    \end{js}
+    \caption{Express GET method snippet.}
+    \label{lst:express_get}
+\end{listing}
+
+POST requests is handled the same way as GET requests. 
+In this case it adds a new item to the ``items'' collection.
+
+\begin{listing}
+    \begin{js}
+        router.post("/api", function(req, res, next) {
+            console.log(req.body);
+            console.log("Adding " + req.body.title);
+            storage.getItem("items").then(function(items) {
+                var item = new Item(req.body.key, req.body.title, false)
+                items.push(item);
+                storage.setItem("items", items);
+                res.json(item)
+            });
+        });
+    \end{js}
+    \caption{Express POST method snippet.}
+    \label{lst:express_post}
+\end{listing}
+
+To render the UI we use React.
+React executes on the client side and sends the POST and GET requests to the server, and the requests is processed by Express.
+
+We use Node.js with Express since it's easy to start with and follows the MVC architecture, where the model is apart from the view and controller.
+React is used to make it easy and simple to manage and update the UI. 
