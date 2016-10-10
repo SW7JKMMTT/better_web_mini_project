@@ -3,15 +3,16 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "$(npm bin)/concurrently --kill-others 'node ./bin/www' 'npm run watch'",
-    "build": "browserify browser.js -o static/bundle.js",
-    "watch": "$(npm bin)/watchify js/killme.js -p [ css-modulesify -o public/stylesheets/module.css ] -t reactify -o public/js/bundle.js --debug --verbose"
+    "start": "bash -c \"$(npm bin)/concurrently --kill-others 'node ./bin/www' 'npm run watch'\"",
+    "build": "bash -c \"$(npm bin)/browserify browser.js -o static/bundle.js\"",
+    "watch": "bash -c \"$(npm bin)/watchify js/killme.js -p [ css-modulesify -o public/stylesheets/module.css ] -t reactify -o public/js/bundle.js --debug --verbose\""
   },
   "dependencies": {
     "basex": "^0.7.0",
     "body-parser": "~1.15.1",
     "browserify": "^13.1.0",
     "client-ajax": "^0.1.6",
+    "concurrently": "^3.1.0",
     "cookie-parser": "~1.4.3",
     "css-modulesify": "^0.25.1",
     "debug": "~2.2.0",
