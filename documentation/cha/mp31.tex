@@ -1,0 +1,58 @@
+%!TEX root = ../main.tex
+\chapter{Miniproject 3.1}
+To create a SOAP server, we use a node package called ``soap-server''.
+The method together with the service which is provided by the API, can be seen in \myref{lst:soap_func}.
+The method only returns the concatenation of two input strings.
+
+\begin{listing}
+    \begin{js}
+        function MyTestService(){
+        }
+        MyTestService.prototype.test1 = function(myArg1, myArg2){
+            return myArg1 + myArg2;
+        };
+    \end{js}
+    \caption{A SOAP API function.}
+    \label{lst:soap_func}
+\end{listing}
+
+A request to the API can be seen in \myref{lst:soap_req}.
+The first line is a curl request and the body of the request can be seen on the following lines. 
+The two arguments, which is sent is ``Soapy '' and ``Hands''.
+
+\begin{listing}
+    \begin{xmlblock}
+        curl --header "content-type: text/xml" -d @request.xml http://localhost:1337/testService
+        <SOAP-ENV:Envelope
+          xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+          SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+          <SOAP-ENV:Body>
+            <m:test1 xmlns:m="http://127.0.0.1:1337/testService">
+              <myArg1>Soapy </myArg1>
+              <myArg2>Hands</myArg2>
+            </m:test1>
+          </SOAP-ENV:Body>
+        </SOAP-ENV:Envelope>
+    \end{xmlblock}
+    \caption{A SOAP request.}
+    \label{lst:soap_req}
+\end{listing}
+
+The reply from the server can be seen in \myref{lst:soap_respond}.
+The reply is, as exptected ``Soapy Hands''.
+
+\begin{listing}
+    \begin{xmlblock}
+        <soap:Envelope
+                xmlns:soap="http://www.w3.org/2001/12/soap-envelope"
+                soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding">
+                <soap:Body>
+                        <test1Response>
+                                <return>Soapy Hands</return>
+                        </test1Response>
+                </soap:Body>
+        </soap:Envelope>
+    \end{xmlblock}
+    \caption{A SOAP response.}
+    \label{lst:soap_respond}
+\end{listing}
