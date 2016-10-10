@@ -1,6 +1,6 @@
 %!TEX root = ../main.tex
 \chapter{Miniproject 2}
-\section{2.1 }
+\section{XQuery}
 
 Since we’re using express, we made the XQuery using it. We also used a tool called BaseX as an XQuery server.
 
@@ -51,12 +51,7 @@ Our code ended being as shown in \cref{lst:jsbasex}.
 
         var client = new basex.Session("localhost", 1984, "admin", "admin")
 
-        client.execute("xquery 1 to 10", function(err, reply) {
-            console.dir(reply);
-        });
-
         client.execute("OPEN psd7003");
-
 
         /* GET home page. */
         router.get('/courseinstructors', function(req, res, next) {

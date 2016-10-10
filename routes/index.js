@@ -4,12 +4,7 @@ var basex = require("basex");
 
 var client = new basex.Session("localhost", 1984, "admin", "admin")
 
-client.execute("xquery 1 to 10", function(err, reply) {
-	console.dir(reply);
-});
-
 client.execute("OPEN psd7003");
-
 
 /* GET home page. */
 router.get('/courseinstructors', function(req, res, next) {
