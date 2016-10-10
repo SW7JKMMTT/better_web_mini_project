@@ -23,7 +23,7 @@ router.get('/', function(req, res, next) {
 	});
 });
 
-router.post("/api", function(req, res, next) {
+router.post("/api/todo", function(req, res, next) {
 	console.log(req.body);
 	console.log("Adding " + req.body.title);
 	storage.getItem("items").then(function(items) {
@@ -34,10 +34,17 @@ router.post("/api", function(req, res, next) {
 	});
 });
 
-router.get("/api", function(req, res, next) {
+router.get("/api/todo", function(req, res, next) {
 	console.log("Getting")
 	storage.getItem("items").then(function(items) {
 		res.json(items)
+	});
+});
+
+router.get("/api/todo/:t_id", function(req, res, next) {
+	console.log("Getting")
+	storage.getItem("items").then(function(items) {
+		res.json(items[req.params.t_id])
 	});
 });
 

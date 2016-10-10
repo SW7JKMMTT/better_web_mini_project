@@ -11,7 +11,7 @@ module.exports = React.createClass({
 	},
 	componentDidMount: function() {
 		ajax({
-			url: "/todo/api",
+			url: "/todo/api/todo",
 			method: "GET",
 			success: function(body) {
 				console.log(body)

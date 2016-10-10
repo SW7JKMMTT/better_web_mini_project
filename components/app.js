@@ -13,7 +13,7 @@ module.exports = React.createClass({
 
 	update: function() {
 		ajax({
-			url: "/todo/api",
+			url: "/todo/api/todo",
 			method: "GET",
 		}, function(err, body) {
 			this.setState({items: body});
@@ -25,7 +25,7 @@ module.exports = React.createClass({
 		this.setState({items: newItems});
 
 		ajax({
-			url: "/todo/api",
+			url: "/todo/api/todo",
 			method: "POST",
 			data: text,
 			format: "json",

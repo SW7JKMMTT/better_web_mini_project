@@ -1,0 +1,57 @@
+\chapter{Miniproject 3.2 - REST}
+We decided to use our todo app to showcase REST
+
+The todo app needs 2 different ways to serve data, and one to add data. We
+created a \code{get} endpoint on \code{/todo/api/todo}, seen in
+\cref{lst:getAll} to get all the todo notes. To add new todos, we created
+a \code{post} endpoint on \code{/todo/api/todo}, show in \cref{lst:postOne}. The
+website posts json encoded objects when it wants to add a todo note. We also
+wanted the ability to show a single todo note. For that we create another
+\code{get} endpoint on \code{/todo/api/todo/<key>}, which can be seen in
+\cref{lst:getOne}.
+
+please note that the example doesn't completely follow rest, as it only allows
+responses in JSON.
+
+\begin{listing}
+    \begin{js}
+router.get("/api/todo", function(req, res, next) {
+	console.log("Getting")
+	storage.getItem("items").then(function(items) {
+		res.json(items)
+	});
+});
+    \end{js}
+    \caption{Todo get all method}
+    \label{lst:getAll}
+\end{listing}
+
+\begin{listing}
+    \begin{js}
+router.post("/api/todo", function(req, res, next) {
+	console.log(req.body);
+	console.log("Adding " + req.body.title);
+	storage.getItem("items").then(function(items) {
+		var item = new Item(req.body.key, req.body.title, false)
+		items.push(item);
+		storage.setItem("items", items);
+		res.json(item)
+	});
+});
+    \end{js}
+	\caption{Todo post one method}
+    \label{lst:postOne}
+\end{listing}
+
+\begin{listing}
+    \begin{js}
+router.get("/api/todo/:t_id", function(req, res, next) {
+	console.log("Getting")
+	storage.getItem("items").then(function(items) {
+		res.json(items[req.params.t_id])
+	});
+});
+    \end{js}
+    \caption{Todo get one method}
+    \label{lst:getOne}
+\end{listing}
