@@ -41,7 +41,7 @@ debug: once
 	rubber-info $(MAIN)
 
 bibtex.bib: $(BIB_SOURCES)
-	cat $^ > bibtex.bib
+	# cat $^ > bibtex.bib
 
 lint:
 	chktex -v2 $(shell find . -type f -name "*.tex")
