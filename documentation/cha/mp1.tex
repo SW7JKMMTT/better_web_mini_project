@@ -1,9 +1,9 @@
 %!TEX root = ../main.tex
 \chapter{Miniproject 1}
-We chose to use a framework called Express and React. 
-It works on top of Node.js, which is a JavaScript rumtime. 
+We chose to use a composite of the two frameworks called Express and React. 
+It works on top of Node.js, which is a server-side JavaScript environment that leverages the V8 JavaScript Engine. 
 
-Express handles the web server and the routing to files, and React handles the rendering of the user interface.
+Express handles the web server and the routing of web requests, while React handles the rendering of the user interface.
 
 An example of Express routing can be seen on \myref{lst:express_route} and \myref{lst:express_route_use}.
 
@@ -65,7 +65,7 @@ In this case it adds a new item to the ``items'' collection.
 \end{listing}
 
 To render the UI we use React.
-React executes on the client side and sends the POST and GET requests to the server, and the requests is processed by Express.
+React executes on the client side and we send the POST and GET requests to the server, where the requests are processed by Express.
 
 We use Node.js with Express since it's easy to start with and follows the MVC architecture, where the model is apart from the view and controller.
-React is used to make it easy and simple to manage and update the UI. 
+React is used to make it easy and simple to manage and update the UI without forcing the user to reload the page. 
