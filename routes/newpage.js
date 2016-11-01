@@ -1,12 +1,16 @@
 var express = require('express');
 var router = express.Router();
 
-router.get('/', function(req, res, next){
-    res.render('newpage', {title: 'Newpage!' });
-});
+var soap = require('soap-server');
 
-router.post("/", function(req, res) {
-	res.render('postpage', {title: req.params.title})
-});
+function MyTestService(){
+}
+MyTestService.prototype.test1 = function(myArg1, myArg2){
+    return myArg1 + myArg2;
+};
+
+var soapServer = new soap.SoapServer();
+var soapService = soapServer.addService('testService', new MyTestService());
+
 
 module.exports = router;
