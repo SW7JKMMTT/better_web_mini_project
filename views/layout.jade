@@ -1,9 +1,13 @@
 doctype html5
 html
-	head
-		title= title
-		link(rel='stylesheet', href='/stylesheets/style.css')
-		link(rel='stylesheet', href='/stylesheets/module.css')
-	body
-		block content
-		script(src="/js/bundle.js")
+    head
+        title= title
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        link(rel='stylesheet', href='/stylesheets/module.css')
+    body
+        ul
+            each item in navitems
+                li
+                    a(href=item.href) #{item.text}
+        block content
+        script(src="/js/bundle.js")

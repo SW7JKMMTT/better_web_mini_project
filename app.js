@@ -9,7 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var newpage = require('./routes/newpage');
 var todo = require('./routes/todo');
-var xml = require('./routes/xml');
+// var xml = require('./routes/xml');
 
 var app = express();
 
@@ -26,11 +26,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'components')));
 
+app.locals.navitems = [
+    {href:"/", text: "Front page"},
+    {href:"/todo", text: "Todo"},
+    // {href:"/xml", text: "XML"},
+    // {href:"/xml/pew", text: "pew"},
+    {href:"/users", text: "users"}
+];
+
 app.use('/', routes);
 app.use('/users', users);
 app.use('/newpage', newpage);
 app.use('/todo', todo);
-app.use('/xml', xml);
+// app.use('/xml', xml);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
